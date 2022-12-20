@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/zimdarsjon/threejs-playground#readme",
   "dependencies": {
+    "three": "^0.147.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"

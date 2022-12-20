@@ -7,6 +7,8 @@ import { setSize, Resizer } from './systems/Resizer.js';
 import { createLights } from './components/lights.js';
 import { Loop } from './systems/Loop.js';
 import { createControls } from './systems/controls.js';
+import { createGround } from './components/ground.js';
+import { createDancer } from './components/dancer.js';
 
 let camera;
 let controls;
@@ -28,7 +30,7 @@ class World {
 
     const { directionalLight, ambienLight } = createLights();
 
-    scene.add(directionalLight, ambienLight);
+    scene.add(directionalLight, ambienLight, createGround());
 
 
     // Sets size initially and watches for resizing of screen
@@ -48,6 +50,11 @@ class World {
   }
   end() {
     loop.end();
+  }
+  async init() {
+    const dancer = await createDancer();
+    loop.updatables.push(dancer);
+    scene.add(dancer);
   }
 }
 

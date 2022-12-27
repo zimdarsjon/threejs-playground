@@ -7,14 +7,17 @@ import { setSize, Resizer } from './systems/Resizer.js';
 import { createLights } from './components/lights.js';
 import { Loop } from './systems/Loop.js';
 import { createControls } from './systems/controls.js';
+import { createFirstPersonControls } from './systems/firstPersonControls.js';
 import { createGround } from './components/ground.js';
 import { createDancer } from './components/dancer.js';
+import { FirstPersonCamera } from './components/firstPersonCamera.js';
 
 let camera;
 let controls;
 let renderer;
 let scene;
 let loop;
+let fpsCamera;
 
 class World {
   constructor(container) {
@@ -23,8 +26,8 @@ class World {
     renderer = createRenderer();
 
     // Attaches itself to the DOM Element of the renderer
-    controls = createControls(camera, renderer);
-
+    controls = createFirstPersonControls(camera, renderer, container);
+    //fpsCamera = new FirstPersonCamera(camera);
     // Add render to screen
     container.append(renderer.domElement);
 
@@ -34,7 +37,7 @@ class World {
 
 
     // Sets size initially and watches for resizing of screen
-    const resizer = new Resizer(container, camera, renderer);
+    const resizer = new Resizer(container, camera, renderer, controls);
 
     // Rerenders the scene, ticking on updatables on its list
     loop = new Loop(camera, scene, renderer);

@@ -8,6 +8,20 @@ class Loop {
     this.camera = camera;
     this.scene = scene;
     this.renderer = renderer;
+    this.paused = false;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (this.paused) {
+          clock.start();
+          this.start();
+          this.paused = false;
+        } else {
+          clock.stop();
+          this.stop();
+          this.paused = true;
+        }
+      }
+    })
   }
   start() {
     this.renderer.setAnimationLoop(() => {
